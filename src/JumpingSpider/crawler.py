@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 import os
 import threading
 import time
-from typing import Callable
+from collections.abc import Callable
+from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 from urllib.parse import urljoin, urlparse
 
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 from requests.adapters import HTTPAdapter
 
 from JumpingSpider.models import CrawlConfig, CrawlSummary, LinkReference, LinkResult
@@ -171,9 +171,7 @@ class SpiderCrawler:
             return False
         if result.resource_type != "page":
             return False
-        if self.config.max_depth is not None and result.depth > self.config.max_depth:
-            return False
-        return True
+        return not (self.config.max_depth is not None and result.depth > self.config.max_depth)
 
     def _register_url(
         self,

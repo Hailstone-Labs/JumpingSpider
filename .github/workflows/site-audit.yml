@@ -1,0 +1,74 @@
+name: On-Demand Site Audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: "Starting URL to crawl"
+        required: true
+        default: "https://weather.ndc.nasa.gov/tempo/"
+        type: string
+      check_external:
+        description: "Validate external & sibling links"
+        required: false
+        default: true
+        type: boolean
+      check_assets:
+        description: "Validate page assets (<img>, <script>, <link>, etc.)"
+        required: false
+        default: true
+        type: boolean
+      workers:
+        description: "Concurrent workers"
+        required: false
+        default: "5"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Crawl & Validate Links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Run JumpingSpider
+        env:
+          TARGET_URL: ${{ inputs.target_url }}
+          WORKERS: ${{ inputs.workers }}
+          EXT_FLAG: ${{ inputs.check_external && '--check-external' || '--no-external' }}
+          ASSET_FLAG: ${{ inputs.check_assets && '--check-assets' || '--no-assets' }}
+        run: |
+          mkdir -p reports
+          uv run JumpingSpider "$TARGET_URL" \
+            -w "$WORKERS" \
+            "$EXT_FLAG" \
+            "$ASSET_FLAG" \
+            -o reports/crawl_results.json \
+            -o reports/crawl_results.csv \
+            -o reports/crawl_report.md \
+            -o reports/crawl_report.html
+
+      - name: Publish Job Summary
+        run: cat reports/crawl_report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Crawl Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: jumping-spider-reports
+          path: reports/

@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
-from pathlib import Path
 import threading
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from typing import ClassVar
 from unittest.mock import MagicMock
 
 import pytest
@@ -12,15 +13,15 @@ import requests
 from JumpingSpider.crawler import SpiderCrawler, classify_resource_type
 from JumpingSpider.main import build_parser, crawl_site
 from JumpingSpider.models import CrawlConfig, CrawlSummary, LinkReference, LinkResult
-from JumpingSpider.reporters import export_csv, export_html, export_json, export_markdown, export_report
+from JumpingSpider.reporters import export_report
 from JumpingSpider.tui import JumpingSpiderApp
 
 
 class _TestSiteHandler(BaseHTTPRequestHandler):
     """Local test HTTP server simulating internal pages, broken links, assets, redirects, and HEAD/405."""
 
-    request_counts: dict[tuple[str, str], int] = {}
-    lock = threading.Lock()
+    request_counts: ClassVar[dict[tuple[str, str], int]] = {}
+    lock: ClassVar[threading.Lock] = threading.Lock()
 
     def log_message(self, format: str, *args: object) -> None:
         pass  # keep test output clean

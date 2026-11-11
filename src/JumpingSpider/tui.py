@@ -352,9 +352,11 @@ class JumpingSpiderApp(App[None]):
 
         lines = [
             f"[bold]URL:[/bold] {res.link}",
-            f"[bold]Status:[/bold] {res.status_code} ({'OK' if res.success else (res.error_type or 'Broken')})   "
-            f"[bold]Scope:[/bold] {res.scope}   [bold]Type:[/bold] {res.resource_type}   "
-            f"[bold]Method:[/bold] {res.method_used}   [bold]Content-Type:[/bold] {res.content_type or 'N/A'}",
+            (
+                f"[bold]Status:[/bold] {res.status_code} ({'OK' if res.success else (res.error_type or 'Broken')})   "
+                f"[bold]Scope:[/bold] {res.scope}   [bold]Type:[/bold] {res.resource_type}   "
+                f"[bold]Method:[/bold] {res.method_used}   [bold]Content-Type:[/bold] {res.content_type or 'N/A'}"
+            ),
         ]
         if res.is_redirect:
             chain_str = " -> ".join([*res.redirect_chain, res.final_url])
