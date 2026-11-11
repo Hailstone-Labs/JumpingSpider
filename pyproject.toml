@@ -1,0 +1,20 @@
+[project]
+name = "JumpingSpider"
+version = "0.1.0"
+description = "Web Crawler"
+readme = "README.md"
+authors = [
+    { name = "Roger Allen", email = "roger.allen795@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "requests>=2.34.2",
+]
+
+[project.scripts]
+sport-spider = "JumpingSpider:main"
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
