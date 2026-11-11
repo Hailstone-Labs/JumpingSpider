@@ -9,8 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  release:
-    name: Build & Publish GitHub Release
+  build-and-release:
+    name: Build & Create GitHub Release
     runs-on: ubuntu-latest
 
     steps:
@@ -28,10 +28,17 @@ jobs:
       - name: Install dependencies & run tests
         run: |
           uv sync --locked --all-groups
+          uv run ruff check .
           uv run pytest -v
 
       - name: Build wheel and sdist
         run: uv build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
 
       - name: Create GitHub Release
         env:
@@ -40,3 +47,23 @@ jobs:
           gh release create "${{ github.ref_name }}" dist/* \
             --title "JumpingSpider ${{ github.ref_name }}" \
             --generate-notes
+
+  publish-pypi:
+    name: Publish to PyPI
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/JumpingSpider
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download built artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

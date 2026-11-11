@@ -18,10 +18,29 @@
 
 ## Installation
 
-Requires Python 3.13+ and [uv](https://docs.astral.sh/uv/):
+Requires Python 3.13+.
+
+### From PyPI (Recommended)
 
 ```bash
-uv sync
+# Install globally as an isolated CLI tool with uv
+uv tool install JumpingSpider
+
+# Or run directly without installing using uvx
+uvx JumpingSpider https://example.com/docs/
+
+# Or install with pip / pipx
+pip install JumpingSpider
+```
+
+### From Source (Development)
+
+Requires [uv](https://docs.astral.sh/uv/):
+
+```bash
+git clone https://github.com/Hailstone-Labs/JumpingSpider.git
+cd JumpingSpider
+uv sync --all-groups
 ```
 
 ## Usage
