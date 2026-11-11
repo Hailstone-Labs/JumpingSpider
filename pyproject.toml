@@ -1,6 +1,6 @@
 [project]
 name = "JumpingSpider"
-version = "0.2.0"
+version = "0.2.1"
 description = "Concurrent path-bounded web crawler, broken link detector, and asset validator with multi-format reports and Textual TUI"
 readme = "README.md"
 license = "MIT"

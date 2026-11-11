@@ -1,10 +1,11 @@
 # JumpingSpider
 
+[![PyPI version](https://img.shields.io/pypi/v/JumpingSpider.svg)](https://pypi.org/project/JumpingSpider/)
 [![CI](https://github.com/Hailstone-Labs/JumpingSpider/actions/workflows/ci.yml/badge.svg)](https://github.com/Hailstone-Labs/JumpingSpider/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.13+](https://img.shields.io/badge/python-3.13%2B-blue.svg)](https://www.python.org/downloads/)
 
-**JumpingSpider** (`v0.2.0`) is a concurrent web crawler and broken link/asset validator with multi-format reporting (`.json`, `.csv`, `.md`, `.html`) and an interactive Terminal User Interface (TUI).
+**JumpingSpider** (`v0.2.1`) is a concurrent web crawler and broken link/asset validator with multi-format reporting (`.json`, `.csv`, `.md`, `.html`) and an interactive Terminal User Interface (TUI).
 
 ## Features
 
