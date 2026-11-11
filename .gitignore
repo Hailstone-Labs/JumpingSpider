@@ -6,6 +6,12 @@ dist/
 wheels/
 *.egg-info
 
-# Virtual environments
+# Virtual environments & caches
 .venv
 .pytest_cache/
+.ruff_cache/
+
+# OS & generated reports
+.DS_Store
+reports/
+crawl_results.*

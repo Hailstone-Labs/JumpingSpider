@@ -1,10 +1,25 @@
 [project]
 name = "JumpingSpider"
 version = "0.2.0"
-description = "Web Crawler"
+description = "Concurrent path-bounded web crawler, broken link detector, and asset validator with multi-format reports and Textual TUI"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
     { name = "Roger Allen", email = "roger.allen795@gmail.com" }
+]
+keywords = ["crawler", "spider", "broken-links", "link-checker", "tui", "textual", "seo", "site-audit"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP :: Site Management :: Link Checking",
+    "Topic :: Utilities",
+    "Typing :: Typed",
 ]
 requires-python = ">=3.13"
 dependencies = [
@@ -12,6 +27,12 @@ dependencies = [
     "requests>=2.34.2",
     "textual>=8.2.8",
 ]
+
+[project.urls]
+Homepage = "https://github.com/Hailstone-Labs/JumpingSpider"
+Repository = "https://github.com/Hailstone-Labs/JumpingSpider"
+Issues = "https://github.com/Hailstone-Labs/JumpingSpider/issues"
+Changelog = "https://github.com/Hailstone-Labs/JumpingSpider/blob/main/CHANGELOG.md"
 
 [project.scripts]
 JumpingSpider = "JumpingSpider:main"

@@ -1,5 +1,9 @@
 # JumpingSpider
 
+[![CI](https://github.com/Hailstone-Labs/JumpingSpider/actions/workflows/ci.yml/badge.svg)](https://github.com/Hailstone-Labs/JumpingSpider/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13%2B-blue.svg)](https://www.python.org/downloads/)
+
 **JumpingSpider** (`v0.2.0`) is a concurrent web crawler and broken link/asset validator with multi-format reporting (`.json`, `.csv`, `.md`, `.html`) and an interactive Terminal User Interface (TUI).
 
 ## Features
@@ -78,5 +82,17 @@ uv run JumpingSpider --tui https://weather.ndc.nasa.gov/tempo/
 ## Development & Tests
 
 ```bash
+# Run unit tests
 uv run pytest -v
+
+# Run Ruff linter
+uv run ruff check .
 ```
+
+## Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before submitting a pull request. For security issues, please refer to our [Security Policy](SECURITY.md).
+
+## License
+
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for full details.
